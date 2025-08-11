@@ -5,118 +5,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KUST - Certificate Verification Portal</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            color: #333;
         }
-
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-
-        /* Header Styles */
+        
         .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 20px 0;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border-radius: 20px;
+            padding: 30px;
             margin-bottom: 30px;
-            border-radius: 15px;
-            animation: slideDown 0.8s ease-out;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            max-width: 1160px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .university-logo {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .logo-img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .university-info h1 {
-            color: #2c3e50;
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .university-info p {
-            color: #7f8c8d;
-            font-size: 14px;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: #2c3e50;
-            font-weight: 500;
-            padding: 10px 20px;
-            border-radius: 25px;
-            transition: all 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            text-align: center;
+            color: white;
             position: relative;
             overflow: hidden;
         }
-
-        .nav-menu a:hover {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 3s ease-in-out infinite;
         }
-
-        /* Campus Gallery */
-        .campus-gallery {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 30px;
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: bold;
+            color: #1e3c72;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .search-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 40px;
             margin-bottom: 30px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            animation: fadeInUp 0.8s ease-out 0.2s both;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            backdrop-filter: blur(10px);
         }
-
-        @keyframes fadeInUp {
+        
+        .search-input {
+            width: 100%;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        
+        .search-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 20px rgba(102,126,234,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .search-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        .search-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102,126,234,0.4);
+        }
+        
+        .certificate-result {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            backdrop-filter: blur(10px);
+            display: none;
+            animation: slideIn 0.6s ease-out;
+        }
+        
+        @keyframes slideIn {
             from {
                 opacity: 0;
                 transform: translateY(30px);
@@ -126,266 +140,102 @@
                 transform: translateY(0);
             }
         }
-
-        .gallery-title {
-            text-align: center;
-            color: #2c3e50;
-            font-size: 24px;
-            margin-bottom: 20px;
-            position: relative;
+        
+        .verified-badge {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            animation: bounce 2s ease-in-out infinite;
         }
-
-        .gallery-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 2px;
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
         }
-
-        .campus-images {
+        
+        .student-info {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 30px;
             margin-top: 30px;
         }
-
-        .campus-image {
-            position: relative;
+        
+        .info-card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8ecff 100%);
+            padding: 25px;
             border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .info-value {
+            font-size: 16px;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .campus-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .campus-image {
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             transition: transform 0.3s ease;
         }
-
+        
         .campus-image:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
         }
-
+        
         .campus-image img {
             width: 100%;
             height: 250px;
             object-fit: cover;
-            transition: transform 0.3s ease;
         }
-
-        .campus-image:hover img {
-            transform: scale(1.1);
-        }
-
-        .image-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+        
+        .error-message {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
             color: white;
             padding: 20px;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .campus-image:hover .image-overlay {
-            transform: translateY(0);
-        }
-
-        /* Search Section */
-        .search-section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
             border-radius: 15px;
-            padding: 40px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            animation: fadeInUp 0.8s ease-out 0.4s both;
-        }
-
-        .search-title {
             text-align: center;
-            color: #2c3e50;
-            font-size: 28px;
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .search-form {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 30px;
-        }
-
-        .search-input {
-            flex: 1;
-            min-width: 300px;
-            padding: 15px 20px;
-            border: 2px solid #e0e0e0;
-            border-radius: 50px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background: white;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
-        }
-
-        .search-btn {
-            padding: 15px 30px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .search-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-        }
-
-        .search-btn:active {
-            transform: translateY(0);
-        }
-
-        /* Results Section */
-        .results-section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            display: none;
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        .certificate-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 20px;
-            padding: 40px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-
-        .certificate-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .certificate-header {
-            text-align: center;
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .certificate-header h2 {
-            font-size: 32px;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .certificate-header p {
-            font-size: 18px;
-            opacity: 0.9;
-        }
-
-        .student-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .detail-group {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 20px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-        }
-
-        .detail-group h3 {
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: #f8f9fa;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-            padding-bottom: 8px;
-        }
-
-        .detail-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .detail-label {
-            font-weight: 600;
-            opacity: 0.9;
-        }
-
-        .detail-value {
-            font-weight: 400;
-            text-align: right;
-        }
-
-        .verification-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #27ae60;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-weight: bold;
-            z-index: 3;
-            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
-        }
-
-        .no-results {
-            text-align: center;
-            color: #e74c3c;
-            font-size: 18px;
             margin-top: 20px;
-            padding: 30px;
-            background: rgba(231, 76, 60, 0.1);
-            border-radius: 15px;
-            border: 2px solid rgba(231, 76, 60, 0.3);
+            display: none;
+            animation: shake 0.5s ease-in-out;
         }
-
-        /* Loading Animation */
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
         .loading {
             text-align: center;
             padding: 40px;
+            display: none;
         }
-
+        
         .spinner {
             width: 50px;
             height: 50px;
@@ -395,539 +245,284 @@
             animation: spin 1s linear infinite;
             margin: 0 auto 20px;
         }
-
+        
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        /* Statistics Section */
-        .stats-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 15px;
+        
+        .footer {
+            background: rgba(30,60,114,0.9);
+            color: white;
             text-align: center;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-            animation: fadeInUp 0.8s ease-out;
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 40px;
+            backdrop-filter: blur(10px);
         }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .stat-icon {
-            font-size: 48px;
-            color: #667eea;
-            margin-bottom: 15px;
-        }
-
-        .stat-number {
-            font-size: 36px;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
-            color: #7f8c8d;
-            font-size: 16px;
-        }
-
-        /* Responsive Design */
+        
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
+            .container {
+                padding: 10px;
+            }
+            
+            .header, .search-section, .certificate-result {
+                padding: 20px;
+            }
+            
+            .student-info {
+                grid-template-columns: 1fr;
                 gap: 20px;
             }
-
-            .nav-menu {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .search-form {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .search-input {
-                min-width: 250px;
-            }
-
-            .university-info h1 {
-                font-size: 24px;
-            }
-
-            .campus-images {
+            
+            .campus-gallery {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
-        }
-
-        /* Footer */
-        .footer {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            margin-top: 30px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .footer p {
-            color: #7f8c8d;
-            margin-bottom: 10px;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        .footer-links a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: #764ba2;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Header -->
-        <header class="header">
-            <div class="header-content">
-                <div class="university-logo">
-                    <img src="logo.png" class="logo-img">
-                    <div class="university-info">
-                        <h1>Kohat University of Science & Technology</h1>
-                        <p>Certificate Verification Portal</p>
-                    </div>
-                </div>
-                <nav class="nav-menu">
-                    <a href="#home"><i class="fas fa-home"></i> Home</a>
-                    <a href="#verify"><i class="fas fa-certificate"></i> Verify</a>
-                    <a href="#about"><i class="fas fa-info-circle"></i> About</a>
-                    <a href="#contact"><i class="fas fa-phone"></i> Contact</a>
-                </nav>
-            </div>
-        </header>
-
-        <!-- Statistics Section -->
-        <div class="stats-section">
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
-                <div class="stat-number">15,000+</div>
-                <div class="stat-label">Graduates</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fas fa-certificate"></i>
-                </div>
-                <div class="stat-number">3</div>
-                <div class="stat-label">Verified Records</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <div class="stat-number">100%</div>
-                <div class="stat-label">Secure Verification</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fas fa-clock"></i>
-                </div>
-                <div class="stat-number">24/7</div>
-                <div class="stat-label">Online Access</div>
-            </div>
+        <div class="header">
+            <img src="logo.png"
+            <h1 class="text-3xl md:text-4xl font-bold mb-4">Kohat University of Science & Technology</h1>
+            <h2 class="text-xl md:text-2xl font-medium mb-2">Certificate Verification Portal</h2>
+            <p class="text-lg opacity-90">Authentic • Secure • Reliable</p>
         </div>
 
         <!-- Campus Gallery -->
-        <section class="campus-gallery">
-            <h2 class="gallery-title">Our Beautiful Campus</h2>
-            <div class="campus-images">
-                <div class="campus-image">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8e472cca-c052-4c21-a03a-7d4b560bb109.png" alt="Modern KUST main academic building with glass facade and contemporary architecture surrounded by landscaped gardens">
-                    <div class="image-overlay">
-                        <h3>Main Academic Building</h3>
-                        <p>State-of-the-art facilities for learning and research</p>
-                    </div>
-                </div>
-                <div class="campus-image">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c520b388-2725-4c40-b403-bc9d8cf431c8.png" alt="KUST library interior with modern study areas, computer workstations, and students studying in bright natural lighting">
-                    <div class="image-overlay">
-                        <h3>University Library</h3>
-                        <p>Extensive collection of books and digital resources</p>
-                    </div>
-                </div>
-                <div class="campus-image">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5b6ad6fd-477a-40fd-b4b6-8854edd58cc4.png" alt="KUST science laboratory with advanced equipment, modern workbenches, and students conducting experiments">
-                    <div class="image-overlay">
-                        <h3>Research Laboratories</h3>
-                        <p>Advanced equipment for scientific research</p>
-                    </div>
-                </div>
-                <div class="campus-image">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5b15fcf7-4797-4513-ab0a-f138fe6dab4f.png" alt="KUST campus courtyard with students walking between buildings, green lawns, and mountain views in the background">
-                    <div class="image-overlay">
-                        <h3>Campus Courtyard</h3>
-                        <p>Beautiful outdoor spaces for student activities</p>
-                    </div>
-                </div>
+        <div class="campus-gallery">
+            <div class="campus-image">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/407100b4-86d9-42cb-b0eb-2fcb22bc4e0e.png" alt="KUST main campus building with modern architecture featuring glass facades and landscaped gardens in bright daylight" />
             </div>
-        </section>
+            <div class="campus-image">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d4ef8d4c-ed1b-4442-9f1f-63efcf918366.png" alt="KUST library interior with students studying at modern desks with natural lighting and tall bookshelves" />
+            </div>
+            <div class="campus-image">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fb1707ee-f203-4725-85c5-40ec775a2842.png" alt="KUST science laboratory with advanced equipment and students conducting experiments under proper lighting" />
+            </div>
+        </div>
 
         <!-- Search Section -->
-        <section class="search-section" id="verify">
-            <h2 class="search-title">Certificate Verification System</h2>
-            <div class="search-form">
-                <input type="text" class="search-input" id="searchInput" placeholder="Enter Registration Number, CNIC, or Student Name">
-                <button class="search-btn" onclick="searchCertificate()">
-                    <i class="fas fa-search"></i> Verify Certificate
+        <div class="search-section">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Certificate Verification</h3>
+            <div class="max-w-md mx-auto">
+                <input 
+                    type="text" 
+                    id="certificateNumber" 
+                    class="search-input" 
+                    placeholder="Enter Certificate Number (e.g., KUST-000-NP-000)"
+                    maxlength="50"
+                >
+                <button onclick="searchCertificate()" class="search-btn">
+                    Verify Certificate
                 </button>
             </div>
-            <p style="text-align: center; color: #7f8c8d; margin-top: 20px;">
-                <i class="fas fa-info-circle"></i> 
-                You can search by Registration Number, CNIC Number, or Student Name
-            </p>
-        </section>
+        </div>
 
-        <!-- Results Section -->
-        <section class="results-section" id="resultsSection">
-            <!-- Results will be displayed here -->
-        </section>
+        <!-- Loading -->
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p class="text-gray-600">Verifying certificate...</p>
+        </div>
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="error-message">
+            <h4 class="font-bold mb-2">Certificate Not Found</h4>
+            <p>The certificate number you entered could not be found in our database. Please check the number and try again.</p>
+        </div>
+
+        <!-- Certificate Result -->
+        <div id="certificateResult" class="certificate-result">
+            <div class="verified-badge">
+                <span>✓</span>
+                <span>VERIFIED CERTIFICATE</span>
+            </div>
+            
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">Certificate Details</h3>
+            
+            <div class="student-info" id="studentInfo">
+                <!-- Dynamic content will be inserted here -->
+            </div>
+        </div>
 
         <!-- Footer -->
-        <footer class="footer">
-            <p>© 2024 Kohat University of Science & Technology. All rights reserved.</p>
-            <p>Secure Certificate Verification System</p>
-            <div class="footer-links">
-                <a href="#privacy">Privacy Policy</a>
-                <a href="#terms">Terms of Service</a>
-                <a href="#help">Help Center</a>
-                <a href="#api">API Documentation</a>
-            </div>
-        </footer>
+        <div class="footer">
+            <h4 class="text-xl font-bold mb-2">About KUST</h4>
+            <p class="mb-4">Kohat University of Science & Technology is a leading institution committed to excellence in education, research, and innovation. Established to provide quality higher education in various fields of science and technology.</p>
+            <p class="text-sm opacity-75">© 2024 Kohat University of Science & Technology. All rights reserved.</p>
+        </div>
     </div>
 
     <script>
-        // Sample student data
-        const studentDatabase = [
-            {
-                regNumber: "KUST-2020-CS-001",
-                name: "Muhammad Ahmad Khan",
-                fatherName: "Muhammad Rashid Khan",
-                cnic: "17201-1234567-1",
-                address: "House No. 25, Street 5, University Town, Kohat, KPK",
-                course: "Bachelor of Science in Computer Science",
-                completionDate: "June 15, 2024",
-                duration: "4 Years",
-                cgpa: "3.75/4.00",
-                grade: "First Class",
-                issueDate: "July 01, 2024",
-                certificateType: "Degree",
-                department: "Department of Computer Science",
-                faculty: "Faculty of Computing & Engineering",
-                status: "Verified"
+        // Student database
+        const studentDatabase = {
+            'KUST-2021-MBA-087': {
+                name: 'Tahir Iqbal',
+                fatherName: 'Muhammad Aliyas',
+                cnic: '17601-0579283-9',
+                address: 'City Gilgit, District Astore, Tehsil Post Office Astore',
+                course: 'BS Physical',
+                duration: '2 Years',
+                passingYear: '2018',
+                totalMarks: '848 / 1000',
+                cgpa: '3.80',
+                issuedDate: 'Jul 1, 2018',
+                certificateNo: 'KUST-2021-MBA-087'
             },
-            {
-                regNumber: "KUST-2019-EE-045",
-                name: "Fatima Bibi",
-                fatherName: "Abdul Karim",
-                cnic: "17201-9876543-2",
-                address: "Mohalla Jangal Khel, Near City Hospital, Kohat, KPK",
-                course: "Bachelor of Science in Electrical Engineering",
-                completionDate: "March 20, 2024",
-                duration: "4 Years",
-                cgpa: "3.85/4.00",
-                grade: "First Class with Distinction",
-                issueDate: "April 05, 2024",
-                certificateType: "Degree",
-                department: "Department of Electrical Engineering",
-                faculty: "Faculty of Engineering & Technology",
-                status: "Verified"
+            'KUST-2020-CS-156': {
+                name: 'Sarah Ahmed',
+                fatherName: 'Ahmed Khan',
+                cnic: '17301-9876543-2',
+                address: 'House No. 45, Street 12, Kohat, KPK',
+                course: 'BS Computer Science',
+                duration: '4 Years',
+                passingYear: '2020',
+                totalMarks: '920 / 1000',
+                cgpa: '3.95',
+                issuedDate: 'Sep 15, 2020',
+                certificateNo: 'KUST-2020-CS-156'
             },
-            {
-                regNumber: "KUST-2021-MBA-087",
-                name: "Tahir iqbal",
-                fatherName: "Muhammad Aliyas",
-                cnic: "17601-0579283-9",
-                address: "City Gilgit district Astore Tehsil post office Astore",
-                course: "Diploma of Science in Physical Sciences",
-                completionDate: "June 10, 2018",
-                duration: "2 Years",
-                cgpa: "3.8/4.00",
-                grade: "Second Class Upper",
-                issueDate: "Jul 1, 2018",
-                certificateType: "Diploma",
-                department: "Department of Management Sciences",
-                faculty: "Faculty of Management & Social Sciences",
-                status: "Verified"
+            'KUST-2019-ENG-089': {
+                name: 'Muhammad Hassan',
+                fatherName: 'Abdul Rahman',
+                cnic: '15201-5647382-9',
+                address: 'Village Banda Daud Shah, Karak, KPK',
+                course: 'BS Electrical Engineering',
+                duration: '4 Years',
+                passingYear: '2019',
+                totalMarks: '875 / 1000',
+                cgpa: '3.85',
+                issuedDate: 'Aug 20, 2019',
+                certificateNo: 'KUST-2019-ENG-089'
             }
-        ];
-
-        // Animation for statistics on page load
-        window.addEventListener('load', function() {
-            animateStats();
-        });
-
-        function animateStats() {
-            const statNumbers = document.querySelectorAll('.stat-number');
-            statNumbers.forEach(stat => {
-                const finalNumber = stat.textContent;
-                const isPercentage = finalNumber.includes('%');
-                const isPlus = finalNumber.includes('+');
-                const cleanNumber = parseInt(finalNumber.replace(/[^\d]/g, ''));
-                
-                let currentNumber = 0;
-                const increment = cleanNumber / 50;
-                
-                const timer = setInterval(() => {
-                    currentNumber += increment;
-                    if (currentNumber >= cleanNumber) {
-                        currentNumber = cleanNumber;
-                        clearInterval(timer);
-                    }
-                    
-                    let displayNumber = Math.floor(currentNumber).toLocaleString();
-                    if (isPercentage) displayNumber += '%';
-                    if (isPlus) displayNumber += '+';
-                    if (finalNumber.includes('/')) displayNumber = finalNumber;
-                    
-                    stat.textContent = displayNumber;
-                }, 50);
-            });
-        }
+        };
 
         function searchCertificate() {
-            const searchTerm = document.getElementById('searchInput').value.trim().toLowerCase();
-            const resultsSection = document.getElementById('resultsSection');
+            const certificateNumber = document.getElementById('certificateNumber').value.trim().toUpperCase();
+            const loading = document.getElementById('loading');
+            const errorMessage = document.getElementById('errorMessage');
+            const certificateResult = document.getElementById('certificateResult');
             
-            if (!searchTerm) {
-                alert('Please enter a search term');
+            // Hide all results first
+            errorMessage.style.display = 'none';
+            certificateResult.style.display = 'none';
+            
+            if (!certificateNumber) {
+                showError('Please enter a certificate number');
                 return;
             }
             
-            // Show loading animation
-            showLoading();
+            // Show loading
+            loading.style.display = 'block';
             
             // Simulate API call delay
             setTimeout(() => {
-                const result = studentDatabase.find(student => 
-                    student.regNumber.toLowerCase().includes(searchTerm) ||
-                    student.name.toLowerCase().includes(searchTerm) ||
-                    student.cnic.includes(searchTerm) ||
-                    student.fatherName.toLowerCase().includes(searchTerm)
-                );
+                loading.style.display = 'none';
                 
-                if (result) {
-                    displayCertificate(result);
+                if (studentDatabase[certificateNumber]) {
+                    displayCertificate(studentDatabase[certificateNumber]);
                 } else {
-                    displayNoResults();
+                    errorMessage.style.display = 'block';
                 }
             }, 1500);
         }
 
-        function showLoading() {
-            const resultsSection = document.getElementById('resultsSection');
-            resultsSection.style.display = 'block';
-            resultsSection.innerHTML = `
-                <div class="loading">
-                    <div class="spinner"></div>
-                    <p>Verifying certificate... Please wait</p>
-                </div>
-            `;
-            resultsSection.scrollIntoView({ behavior: 'smooth' });
-        }
-
         function displayCertificate(student) {
-            const resultsSection = document.getElementById('resultsSection');
-            resultsSection.innerHTML = `
-                <div class="certificate-card">
-                    <div class="verification-badge">
-                        <i class="fas fa-check-circle"></i> VERIFIED
-                    </div>
-                    
-                    <div class="certificate-header">
-                        <h2>Certificate Verification Result</h2>
-                        <p>This certificate has been successfully verified in our database</p>
-                    </div>
-                    
-                    <div class="student-details">
-                        <div class="detail-group">
-                            <h3><i class="fas fa-user"></i> Personal Information</h3>
-                            <div class="detail-item">
-                                <span class="detail-label">Full Name:</span>
-                                <span class="detail-value">${student.name}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Father's Name:</span>
-                                <span class="detail-value">${student.fatherName}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">CNIC Number:</span>
-                                <span class="detail-value">${student.cnic}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Address:</span>
-                                <span class="detail-value">${student.address}</span>
-                            </div>
-                        </div>
-                        
-                        <div class="detail-group">
-                            <h3><i class="fas fa-graduation-cap"></i> Academic Information</h3>
-                            <div class="detail-item">
-                                <span class="detail-label">Registration No:</span>
-                                <span class="detail-value">${student.regNumber}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Course Name:</span>
-                                <span class="detail-value">${student.course}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Department:</span>
-                                <span class="detail-value">${student.department}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Faculty:</span>
-                                <span class="detail-value">${student.faculty}</span>
-                            </div>
-                        </div>
-                        
-                        <div class="detail-group">
-                            <h3><i class="fas fa-calendar-alt"></i> Completion Details</h3>
-                            <div class="detail-item">
-                                <span class="detail-label">Duration:</span>
-                                <span class="detail-value">${student.duration}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Completion Date:</span>
-                                <span class="detail-value">${student.completionDate}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Issue Date:</span>
-                                <span class="detail-value">${student.issueDate}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Certificate Type:</span>
-                                <span class="detail-value">${student.certificateType}</span>
-                            </div>
-                        </div>
-                        
-                        <div class="detail-group">
-                            <h3><i class="fas fa-trophy"></i> Performance</h3>
-                            <div class="detail-item">
-                                <span class="detail-label">CGPA:</span>
-                                <span class="detail-value">${student.cgpa}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Grade:</span>
-                                <span class="detail-value">${student.grade}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Status:</span>
-                                <span class="detail-value"><i class="fas fa-check-circle" style="color: #27ae60;"></i> ${student.status}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Verification Date:</span>
-                                <span class="detail-value">${new Date().toLocaleDateString()}</span>
-                            </div>
-                        </div>
-                    </div>
+            const studentInfo = document.getElementById('studentInfo');
+            const certificateResult = document.getElementById('certificateResult');
+            
+            studentInfo.innerHTML = `
+                <div class="info-card">
+                    <div class="info-label">Full Name</div>
+                    <div class="info-value">${student.name}</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Father's Name</div>
+                    <div class="info-value">${student.fatherName}</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">CNIC Number</div>
+                    <div class="info-value">${student.cnic}</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Address</div>
+                    <div class="info-value">${student.address}</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Course Name</div>
+                    <div class="info-value">${student.course}</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Duration</div>
+                    <div class="info-value">${student.duration}</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Passing Year</div>
+                    <div class="info-value">${student.passingYear}</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Total Marks</div>
+                    <div class="info-value">${student.totalMarks}</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">CGPA</div>
+                    <div class="info-value">${student.cgpa}</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Issued Date</div>
+                    <div class="info-value">${student.issuedDate}</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Certificate Number</div>
+                    <div class="info-value">${student.certificateNo}</div>
                 </div>
             `;
             
-            // Log the search
-            logSearch(student.name, 'Found');
+            certificateResult.style.display = 'block';
         }
 
-        function displayNoResults() {
-            const resultsSection = document.getElementById('resultsSection');
-            resultsSection.innerHTML = `
-                <div class="no-results">
-                    <i class="fas fa-exclamation-triangle" style="font-size: 48px; margin-bottom: 20px;"></i>
-                    <h3>No Certificate Found</h3>
-                    <p>No certificate was found matching your search criteria.</p>
-                    <p>Please check the following:</p>
-                    <ul style="text-align: left; margin: 20px 0;">
-                        <li>Registration number is correct</li>
-                        <li>CNIC number is entered without dashes</li>
-                        <li>Student name is spelled correctly</li>
-                        <li>The certificate has been issued by KUST</li>
-                    </ul>
-                    <p><strong>For assistance, please contact the Academic Office.</strong></p>
-                </div>
+        function showError(message) {
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.innerHTML = `
+                <h4 class="font-bold mb-2">Error</h4>
+                <p>${message}</p>
             `;
-            
-            // Log the search
-            logSearch(document.getElementById('searchInput').value, 'Not Found');
+            errorMessage.style.display = 'block';
         }
 
-        function logSearch(searchTerm, result) {
-            const timestamp = new Date().toLocaleString();
-            console.log(`[${timestamp}] Search: "${searchTerm}" - Result: ${result}`);
-            
-            // Store in localStorage for demonstration
-            let searchLog = JSON.parse(localStorage.getItem('searchLog') || '[]');
-            searchLog.push({
-                timestamp: timestamp,
-                searchTerm: searchTerm,
-                result: result,
-                ip: '192.168.1.100' // Simulated IP
-            });
-            
-            // Keep only last 100 searches
-            if (searchLog.length > 100) {
-                searchLog = searchLog.slice(-100);
-            }
-            
-            localStorage.setItem('searchLog', JSON.stringify(searchLog));
-        }
-
-        // Allow search on Enter key press
-        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+        // Allow Enter key to trigger search
+        document.getElementById('certificateNumber').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 searchCertificate();
             }
         });
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
+        // Auto-format certificate number input
+        document.getElementById('certificateNumber').addEventListener('input', function(e) {
+            let value = e.target.value.toUpperCase();
+            e.target.value = value;
         });
 
-        // Sample data display on page load (for demonstration)
-        console.log('Available test data:');
-        console.log('Registration Numbers: KUST-2020-CS-001, KUST-2019-EE-045, KUST-2021-MBA-087');
-        console.log('Student Names: Muhammad Ahmad Khan, Fatima Bibi, Ali Hassan');
-        console.log('CNIC Numbers: 17201-1234567-1, 17201-9876543-2, 17201-5555444-3');
+        // Add some interactive animations on page load
+        window.addEventListener('load', function() {
+            // Add entrance animation to campus images
+            const images = document.querySelectorAll('.campus-image');
+            images.forEach((img, index) => {
+                setTimeout(() => {
+                    img.style.opacity = '0';
+                    img.style.transform = 'translateY(30px)';
+                    img.style.transition = 'all 0.6s ease';
+                    
+                    setTimeout(() => {
+                        img.style.opacity = '1';
+                        img.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 200);
+            });
+        });
     </script>
 </body>
 </html>
